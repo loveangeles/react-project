@@ -1,13 +1,25 @@
 import React from "react";
 import './Task.less';
-import { DatePicker } from 'antd';
+import { Button, Tag } from 'antd';
 
 class Task extends React.Component {
     render() {
         return (
             <div className="task-box">
-                <h2 className="title">TASK OA</h2>
-                <DatePicker />
+                {/* 头部 */}
+                <div className="header">
+                    <h2 className="title">TASK OA 任务管理系统</h2>
+                    <Button type="primary" className="btn">新增任务</Button>
+                </div>
+                {/* 标签 */}
+                <div className="tag-box">
+                    <Tag color="#1677ff">全部</Tag>
+                    <Tag>未完成</Tag>
+                    <Tag>已完成</Tag>
+                </div>
+                {/* 表格 */}
+                
+                {/* 对话框 & 表单 */}
             </div>
         );
     }
