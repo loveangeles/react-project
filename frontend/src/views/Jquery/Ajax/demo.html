@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ccc;
+      overflow-y: auto;
+    }
+  </style>
+  <body>
+    <button id="myget">获取数据</button>
+    <button id="mypost">POST</button>
+    <button id="myput">PUT</button>
+    <button id="mypatch">PATCH</button>
+    <button id="mydelete">DELETE</button>
+    <div class="box"></div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(function () {
+      $("#myget").click(async function () {
+        $(window).ajaxStart(function () {
+          console.log("当前页面作用域 第一个ajax发送之前执行");
+          console.log("显示loading");
+        });
+        $(window).ajaxSend(function () {
+          console.log("每一个ajax发送之前执行");
+        });
+        $(window).ajaxSuccess(function () {
+          console.log("每一个ajax发送成功之后执行");
+        });
+        $(window).ajaxError(function () {
+          console.log("每一个ajax发送失败之后执行");
+        });
+        $(window).ajaxComplete(function () {
+          console.log("每一个ajax请求完成之后执行");
+        });
+        $(window).ajaxStop(function () {
+          console.log("所有ajax请求完成之后执行");
+          console.log("隐藏loading");
+        });
+        // $.ajax({
+        //   url: "https://jsonplaceholder.typicode.com/comments",
+        //   method: "get",
+        //   dataType: "json",
+        //   data: {
+        //     postId: 1,
+        //   },
+        //   success: function (data) {
+        //     console.log("成功获取数据:", data);
+        //     $(".box").html(
+        //       data
+        //         .map(
+        //           (item) =>
+        //             `<div class="item"><h3>${item.name}</h3><p>${item.body}</p></div>`
+        //         )
+        //         .join("")
+        //     );
+        //   },
+        //   error: function (xhr, status, error) {
+        //     console.error("请求失败:", status, error);
+        //   },
+        // });
+        try {
+          const response = await $.ajax({
+            url: "https://jsonplaceholder.typicode.com/comments",
+            method: "get",
+            dataType: "json",
+            data: {
+              postId: 1,
+            },
+          });
+          console.log("成功获取数据:", response);
+          $(".box").html(
+            response
+              .map(
+                (item) =>
+                  `<div class="item"><h3>${item.name}</h3><p>${item.body}</p></div>`
+              )
+              .join("")
+          );
+        } catch (error) {
+          console.error("请求失败:", error);
+        }
+      });
+    });
+    // 使用 jQuery 的 Ajax 方法
+  </script>
+</html>

@@ -142,6 +142,7 @@
     ]
   },
   "devDependencies": {
+    "jquery": "^3.7.1",
     "webpack-cli": "^6.0.1"
   }
 }
